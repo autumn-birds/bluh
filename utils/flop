@@ -1,0 +1,11 @@
+#!/bin/bash
+
+N=$1
+echo "Trying to compile and run $N"
+
+cc utils/make1sector.c && \
+      nasm -f bin -o $N.bin $N && \
+      ./a.out $N.bin > $N.sector && \
+      qemu-system-x86_64 -machine pc -fda $N.sector
+
+rm a.out
